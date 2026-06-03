@@ -1,9 +1,18 @@
 package br.unifor.unimeds.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
 public class Medicamento {
-    private int id;
+    @Id
+    private Integer id;
     private String nome;
-    private double preco;
+    private Double preco;
+
+    public Medicamento() {
+    }
+
     public Medicamento(int id, String nome, double preco) {
         this.id = id;
         this.nome = nome;

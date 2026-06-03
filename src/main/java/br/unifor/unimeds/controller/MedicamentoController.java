@@ -1,24 +1,28 @@
 package br.unifor.unimeds.controller;
+import java.util.List;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.unifor.unimeds.model.Medicamento;
-
+import br.unifor.unimeds.service.MedicamentoService;
 
 @RestController
 public class MedicamentoController {
-    private ArrayList<Medicamento> medicamentos = new ArrayList<>(Arrays.asList(
-            new Medicamento(0, "Rivotril", 7),
-            new Medicamento(1, "VitaC", 30)
-    ));
+    @Autowired
+    private MedicamentoService service;
 
     @GetMapping("/medicamentos")
-    public ArrayList<Medicamento> getMedicamentos() {
-        return medicamentos;
+    public List<Medicamento> listarMedicamentos() {
+        return service.recuperarMedicamentos();
+    }
+
+    @PostMapping("/medicamentos")
+    public void criarMedicamento(@RequestBody Medicamento novo) {
+        service.salvar(novo);
     }
     
 }
